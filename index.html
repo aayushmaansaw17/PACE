@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PACE — Student Workload Management & Prioritisation</title>
+  <meta name="description" content="Find your focus. Make your time count. Rule-based student workload prioritization and adaptive weekly scheduling.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/planner.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%236366f1%22/><text y=%22.9em%22 font-size=%2280%22 font-weight=%22bold%22 x=%2218%22 fill=%22white%22>P</text></svg>">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="brand-section">
+        <div class="brand-logo-wrap">
+          <div class="brand-icon">P</div>
+          <div class="brand-text">
+            <span class="brand-name">PACE</span>
+            <span class="brand-tagline">Make your time count</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-item active" data-view="dashboard">
+          <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          <span>Dashboard</span>
+          <span class="nav-item-count" id="nav-count-dashboard">0</span>
+        </div>
+
+        <div class="nav-item" data-view="tasks">
+          <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span>My Tasks</span>
+          <span class="nav-item-count" id="nav-count-tasks">0</span>
+        </div>
+
+        <div class="nav-item" data-view="priorities">
+          <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Priorities</span>
+          <span class="nav-item-count" id="nav-count-priorities" style="color: var(--accent-amber);">0</span>
+        </div>
+
+        <div class="nav-item" data-view="planner">
+          <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Weekly Planner</span>
+        </div>
+
+        <div class="nav-item" data-view="settings">
+          <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Settings</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar">A</div>
+          <div class="user-info">
+            <span class="user-name">Aayushmaan</span>
+            <span class="user-target">Class 11 / IPMAT</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main View Area -->
+    <main class="app-main">
+      <!-- Top Sticky Bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="page-title-wrap">
+            <h2 class="page-title" id="page-title-text">Overview</h2>
+            <span class="page-subtitle" id="page-subtitle-text">Personal academic dashboard and active commitments</span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button class="btn btn-secondary btn-sm" onclick="window.PACE.analyzePriorities()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Analyse My Priorities
+          </button>
+          <button class="btn btn-primary" onclick="window.PACE.openTaskModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            + Add Task
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Views Body -->
+      <div class="content-body">
+
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="view-dashboard" class="view-panel active">
+          <!-- Greeting Banner -->
+          <div class="greeting-banner">
+            <div class="greeting-content">
+              <h1 id="greeting-student-name">Good morning, Aayushmaan</h1>
+              <p>Here is what demands your attention today across school, competitive prep and projects.</p>
+            </div>
+            <div class="greeting-meta">
+              <div class="study-pace-meter">
+                <span class="pace-label">Current Date</span>
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary);" id="greeting-current-date">Today</span>
+              </div>
+              <div class="study-pace-meter">
+                <span class="pace-label">Progress Rate</span>
+                <span class="pace-value" id="greeting-completion-rate">0% Done</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Statistics Grid -->
+          <div class="stats-grid">
+            <div class="stat-card stat-pending">
+              <div class="stat-header">
+                <span class="stat-title">Pending Tasks</span>
+                <div class="stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                </div>
+              </div>
+              <div class="stat-number" id="stat-pending-count">0</div>
+              <div class="stat-subtext">Active responsibilities</div>
+            </div>
+
+            <div class="stat-card stat-due-today">
+              <div class="stat-header">
+                <span class="stat-title">Due Today</span>
+                <div class="stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+              </div>
+              <div class="stat-number" id="stat-today-count">0</div>
+              <div class="stat-subtext">Requires attention before night</div>
+            </div>
+
+            <div class="stat-card stat-overdue">
+              <div class="stat-header">
+                <span class="stat-title">Overdue</span>
+                <div class="stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                </div>
+              </div>
+              <div class="stat-number" id="stat-overdue-count" style="color: var(--accent-rose);">0</div>
+              <div class="stat-subtext">Missed deadlines to resolve</div>
+            </div>
+
+            <div class="stat-card stat-completed">
+              <div class="stat-header">
+                <span class="stat-title">Completed</span>
+                <div class="stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </div>
+              <div class="stat-number" id="stat-completed-count">0</div>
+              <div class="stat-subtext">Completed tasks</div>
+            </div>
+          </div>
+
+          <!-- Section Toolbar -->
+          <div class="section-toolbar">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary);">Top Ranked Priorities</h3>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-secondary btn-sm" onclick="window.PACE.switchView('tasks')">View All Tasks →</button>
+              <button class="btn btn-accent btn-sm" onclick="window.PACE.switchView('planner')">Weekly Planner</button>
+            </div>
+          </div>
+
+          <!-- Task Cards List -->
+          <div id="dashboard-recent-tasks" class="tasks-container"></div>
+        </section>
+
+        <!-- 2. MY TASKS VIEW -->
+        <section id="view-tasks" class="view-panel">
+          <div class="section-toolbar">
+            <div class="search-filter-bar">
+              <div class="search-box">
+                <svg class="search-box-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="task-search-input" class="form-input" placeholder="Search tasks, subjects, topics...">
+              </div>
+
+              <select id="filter-category" class="filter-select">
+                <option value="all">All Categories</option>
+                <option value="School">School</option>
+                <option value="Competitive Exams">Competitive Exams</option>
+                <option value="Extracurricular">Extracurricular</option>
+                <option value="Personal">Personal</option>
+                <option value="Other">Other</option>
+              </select>
+
+              <select id="filter-priority" class="filter-select">
+                <option value="all">All Priorities</option>
+                <option value="Critical">Critical</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+
+              <select id="filter-status" class="filter-select">
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending Only</option>
+                <option value="completed">Completed Only</option>
+              </select>
+
+              <button class="btn btn-ghost btn-sm" onclick="window.PACE.clearFilters()">Clear Filters</button>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-primary" onclick="window.PACE.openTaskModal()">+ Add Task</button>
+            </div>
+          </div>
+
+          <!-- All Tasks List -->
+          <div id="all-tasks-container" class="tasks-container"></div>
+        </section>
+
+        <!-- 3. PRIORITIES VIEW -->
+        <section id="view-priorities" class="view-panel">
+          <div class="section-toolbar" style="margin-bottom: 0.75rem;">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Smart Priority Analysis</h3>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                Rule-based ranking combining deadline proximity, academic weight and study effort requirements.
+              </p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="window.PACE.analyzePriorities()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Recalculate Priorities
+            </button>
+          </div>
+
+          <div id="priority-analysis-summary" style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem 1.25rem; margin-bottom: 1.25rem;"></div>
+
+          <div id="priority-list-container" class="tasks-container"></div>
+        </section>
+
+        <!-- 4. WEEKLY PLANNER VIEW -->
+        <section id="view-planner" class="view-panel">
+          <div class="planner-controls-bar">
+            <div class="planner-summary">
+              <div class="planner-stat-pill">
+                <span class="pill-label">Total Workload</span>
+                <span class="pill-val" id="planner-stat-workload">0 hrs</span>
+              </div>
+              <div class="planner-stat-pill">
+                <span class="pill-label">Weekly Study Budget</span>
+                <span class="pill-val" id="planner-stat-capacity">0 hrs</span>
+              </div>
+              <div class="planner-stat-pill">
+                <span class="pill-label">Balance</span>
+                <span class="pill-val" id="planner-stat-balance" style="color: var(--accent-emerald);">0 hrs</span>
+              </div>
+            </div>
+
+            <div class="planner-actions">
+              <button class="btn btn-primary btn-sm" onclick="window.PACE.generatePlan()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                Generate My Weekly Plan
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="window.PACE.rescheduleUnfinished()" title="Roll forward overdue past items into today">
+                Reschedule Past Tasks
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="window.PACE.savePlan()">
+                Save Plan
+              </button>
+              <button class="btn btn-ghost btn-sm" onclick="window.PACE.resetPlan()">
+                Reset Plan
+              </button>
+            </div>
+          </div>
+
+          <!-- Overload Warning Banner -->
+          <div id="planner-warning-banner" class="planner-warning-banner"></div>
+
+          <!-- 7-Day Planner Grid -->
+          <div id="planner-grid-container" class="planner-grid"></div>
+        </section>
+
+        <!-- 5. SETTINGS VIEW -->
+        <section id="view-settings" class="view-panel">
+          <div style="max-width: 680px; margin: 0 auto; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: var(--radius-xl); padding: 2rem;">
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Study Preferences & Capacity</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.75rem;">
+              Configure your daily study capacity so the Adaptive Planner can accurately prevent workload burnout.
+            </p>
+
+            <form id="settings-form">
+              <div class="form-group">
+                <label class="form-label">Student Name</label>
+                <input type="text" id="setting-student-name" class="form-input" placeholder="e.g. Aayushmaan">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Target Academic Focus / Exam</label>
+                <input type="text" id="setting-target-exam" class="form-input" placeholder="e.g. Class 11 / IPMAT / JEE">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Weekday Daily Study Hours (Mon-Fri)</label>
+                  <input type="number" step="0.5" min="1" max="14" id="setting-weekday-hours" class="form-input" value="3.5">
+                  <small style="color: var(--text-muted); font-size: 0.72rem;">Excluding regular school hours</small>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Weekend Daily Study Hours (Sat-Sun)</label>
+                  <input type="number" step="0.5" min="1" max="16" id="setting-weekend-hours" class="form-input" value="6.0">
+                  <small style="color: var(--text-muted); font-size: 0.72rem;">Available for deep prep & projects</small>
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn btn-primary">Save Preferences</button>
+              </div>
+            </form>
+
+            <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 2rem 0;">
+
+            <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Data Management</h4>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              All tasks and schedules are stored securely in your browser's local storage. You can backup or restore them as JSON.
+            </p>
+
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" id="btn-export-data">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export Backup (JSON)
+              </button>
+
+              <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Import Backup
+                <input type="file" id="file-import-data" accept=".json" style="display: none;">
+              </label>
+
+              <button class="btn btn-secondary btn-sm" onclick="window.PACE.loadSampleData()">
+                Load Sample Student Tasks
+              </button>
+
+              <button class="btn btn-danger btn-sm" onclick="window.PACE.clearAllData()">
+                Reset Everything
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT TASK MODAL -->
+  <div class="modal-overlay" id="task-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="task-modal-title">Add New Task</h3>
+        <button class="btn-icon" onclick="window.PACE.closeTaskModal()" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <form id="task-form">
+        <div class="modal-body">
+          <div class="form-error" id="task-form-error"></div>
+
+          <div class="form-group">
+            <label class="form-label">Task Name <span class="required">*</span></label>
+            <input type="text" id="task-input-title" class="form-input" placeholder="e.g. Accountancy Project Trial Balance" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description / Study Goals (optional)</label>
+            <textarea id="task-input-desc" class="form-textarea" rows="2" placeholder="Specific problem sets, formulas or chapters to cover..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Category <span class="required">*</span></label>
+              <select id="task-input-category" class="form-select">
+                <option value="School">School</option>
+                <option value="Competitive Exams">Competitive Exams</option>
+                <option value="Extracurricular">Extracurricular</option>
+                <option value="Personal">Personal</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Deadline (Date & Time) <span class="required">*</span></label>
+              <input type="datetime-local" id="task-input-deadline" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Importance Level <span class="required">*</span></label>
+            <div class="radio-tile-group">
+              <div>
+                <input type="radio" id="imp-low" name="importance" value="Low" style="display: none;">
+                <label for="imp-low" class="radio-tile-label">Low</label>
+              </div>
+              <div>
+                <input type="radio" id="imp-medium" name="importance" value="Medium" checked style="display: none;">
+                <label for="imp-medium" class="radio-tile-label">Medium</label>
+              </div>
+              <div>
+                <input type="radio" id="imp-high" name="importance" value="High" style="display: none;">
+                <label for="imp-high" class="radio-tile-label">High</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Estimated Completion Time (mins) <span class="required">*</span></label>
+              <input type="number" id="task-input-duration" class="form-input" min="5" step="5" value="60" required>
+              <small style="color: var(--text-muted); font-size: 0.72rem;">e.g. 60 = 1h, 90 = 1.5h, 120 = 2h</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Preferred Study Slot (optional)</label>
+              <input type="text" id="task-input-slot" class="form-input" placeholder="e.g. Evening 7:00 - 9:00 PM">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="window.PACE.closeTaskModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-save-task">Save Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="delete-modal">
+    <div class="modal-container" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="color: var(--accent-rose);">Delete Task</h3>
+        <button class="btn-icon" onclick="window.PACE.closeDeleteConfirmModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+          Are you sure you want to delete this task?
+        </p>
+        <p id="delete-task-name" style="font-weight: 600; color: var(--text-primary); font-size: 0.95rem;"></p>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem;">
+          This action will permanently remove it from your task list and weekly planner.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="window.PACE.closeDeleteConfirmModal()">Cancel</button>
+        <button class="btn btn-danger btn-sm" onclick="window.PACE.confirmDeleteExecution()">Delete Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
